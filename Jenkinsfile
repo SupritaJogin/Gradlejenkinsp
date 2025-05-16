@@ -1,19 +1,37 @@
 pipeline {
     agent any
     tools {
-        gradle 'GRADLE'  // ensure this matches Jenkins Tool config
-        jdk 'JAVA'       // ensure this matches Jenkins Tool config
+        jdk 'JAVA'         // Make sure this matches your Jenkins JDK tool name
+        maven 'MAVEN'      // Make sure this matches your Jenkins Maven tool name
     }
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SupritaJogin/Gradlejenkinsp.git'
+            }
+        }
         stage('Build') {
             steps {
-                bat 'gradlew.bat clean build'
+                bat 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                bat 'gradlew.bat test'
+                bat 'mvn test'
             }
+        }
+        stage('Package') {
+            steps {
+                bat 'mvn package'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build and tests succeeded!'
+        }
+        failure {
+            echo 'Build or tests failed!'
         }
     }
 }
