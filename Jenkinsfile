@@ -1,9 +1,12 @@
 pipeline {
     agent any
+
     tools {
-        gradle 'Gradle'
-        jdk 'JDK'
-    }{
+        gradle 'Gradle'  // Ensure 'Gradle' matches the name configured in Jenkins global tool settings
+        jdk 'JDK'        // Ensure 'JDK' matches your configured JDK name
+    }
+
+    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/SupritaJogin/Gradlejenkinsp.git'
@@ -11,20 +14,21 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                bat 'gradle clean build'
             }
         }
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat 'gradle test'
             }
         }
         stage('Package') {
             steps {
-                bat 'mvn package'
+                bat 'gradle assemble'
             }
         }
     }
+
     post {
         success {
             echo 'Build and tests succeeded!'
@@ -34,3 +38,5 @@ pipeline {
         }
     }
 }
+
+      
