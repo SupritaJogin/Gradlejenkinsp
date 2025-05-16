@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     tools {
-        gradle 'Gradle'
-        jdk 'JDK'
+        gradle 'GRADLE'  // or exact Gradle tool name from Jenkins config
+        jdk 'JAVA'       // or exact JDK tool name from Jenkins config
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/<your-repo>.git'
+                git branch: 'main', url: 'https://github.com/SupritaJogin/Gradlejenkinsp.git'
             }
         }
         stage('Build') {
