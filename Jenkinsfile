@@ -11,17 +11,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                bat 'gardle clean install'
             }
         }
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat 'gradle test'
             }
         }
         stage('Package') {
             steps {
-                bat 'mvn package'
+                bat 'gradle package'
             }
         }
     }
