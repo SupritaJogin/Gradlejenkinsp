@@ -1,10 +1,9 @@
 pipeline {
     agent any
     tools {
-        jdk 'JAVA'         // Make sure this matches your Jenkins JDK tool name
-        maven 'MAVEN'      // Make sure this matches your Jenkins Maven tool name
-    }
-    stages {
+        gradle 'Gradle'
+        jdk 'JDK'
+    }{
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/SupritaJogin/Gradlejenkinsp.git'
