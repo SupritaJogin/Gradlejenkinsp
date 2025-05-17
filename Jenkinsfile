@@ -22,11 +22,7 @@ pipeline {
                 bat 'gradle test'
             }
         }
-        stage('Package') {
-            steps {
-                bat 'gradle package'
-            }
-        }
+       
     }
 
     post {
